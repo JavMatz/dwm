@@ -4,10 +4,11 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+
 static const char *fonts[]          = {"monospace:size=11"};
 static const char dmenufont[]       = "monospace:size=11";
 
@@ -24,8 +25,21 @@ static const char *colors[][3]      = {
 	[SchemeSel]  = { selfgcolor, selbgcolor,  selbordercolor  },
 };
 
+/* static const char *fonts[]          = { "monospace:size=10" }; */
+/* static const char dmenufont[]       = "monospace:size=10"; */
+/* static const char col_gray1[]       = "#222222"; */
+/* static const char col_gray2[]       = "#444444"; */
+/* static const char col_gray3[]       = "#bbbbbb"; */
+/* static const char col_gray4[]       = "#eeeeee"; */
+/* static const char col_cyan[]        = "#005577"; */
+/* static const char *colors[][3]      = { */
+/* 	/\*               fg         bg         border   *\/ */
+/* 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 }, */
+/* 	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  }, */
+/* }; */
+
 /* tagging */
-static const char *tags[] = { "1", "\uf269", "3", "4", "\uf11b", "6", "7", "\uf001", "\uf714" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -49,6 +63,7 @@ static const Rule rules[] = {
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -58,7 +73,7 @@ static const Layout layouts[] = {
 };
 
 /* key definitions */
-#define MODKEY Mod4Mask
+#define MODKEY Mod1Mask
 #define TAGKEYS(KEY,TAG) \
 	{ MODKEY,                       KEY,      view,           {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask,           KEY,      toggleview,     {.ui = 1 << TAG} }, \
@@ -70,14 +85,10 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
+
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
-
 static Key keys[] = {
-	/* modifier                     key        function        argument */
-	/* Backlight control */
-	{ 0,                       	XF86XK_MonBrightnessDown,      spawn,           SHCMD("xbacklight -dec 10") },
-	{ 0,                       	XF86XK_MonBrightnessUp,      spawn,           SHCMD("xbacklight -inc 10") },
 	/* Volume control */
 	{ 0,                       	XF86XK_AudioMute,      spawn,           SHCMD("amixer -q set Master toggle ; pkill -RTMIN+10 dwmblocks") },
 	{ 0,                       	XF86XK_AudioLowerVolume,      spawn,           SHCMD("amixer set Master 5%- unmute ; pkill -RTMIN+10 dwmblocks") },
@@ -90,6 +101,7 @@ static Key keys[] = {
 	{ 0,                       	XK_Print,      spawn,           SHCMD("kbd-screenshot") },
 	{ ShiftMask,                    XK_Print,      spawn,           SHCMD("kbd-screenshot 1")},
 	{ MODKEY|ControlMask,           XK_F10,    spawn,          SHCMD("dmenu-playmusic") },
+	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
