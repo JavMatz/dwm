@@ -36,7 +36,7 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{"Gimp",     NULL,       NULL,       0,            1,           -1 },
 	/* Tag 9 */
-	{ "qBittorrent",   "qbittorrent",       NULL,       1 << 8,       0,           -1 },
+	{ "Transmission-gtk",   "transmission-gtk",       NULL,       1 << 8,       0,           -1 },
 	/* Tag 8 */
 	{ "Audacious",   "audacious",       NULL,       1 << 7,       0,           -1 },
 	/* Tag 5 */
