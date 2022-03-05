@@ -77,9 +77,9 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "alacritty", NULL };
 static Key keys[] = {
 	/* Volume control */
-	{ 0,                       	XF86XK_AudioMute,      spawn,           SHCMD("amixer -q set Master toggle ; pkill -RTMIN+10 dwmblocks") },
-	{ 0,                       	XF86XK_AudioLowerVolume,      spawn,           SHCMD("amixer set Master 5%- unmute ; pkill -RTMIN+10 dwmblocks") },
-	{ 0,                       	XF86XK_AudioRaiseVolume,      spawn,           SHCMD("amixer set Master 5%+ unmute ; pkill -RTMIN+10 dwmblocks") },
+	{ 0,                       	XF86XK_AudioMute,      spawn,           SHCMD("pamixer -t; pkill -RTMIN+10 dwmblocks") },
+	{ 0,                       	XF86XK_AudioLowerVolume,      spawn,           SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },
+	{ 0,                       	XF86XK_AudioRaiseVolume,      spawn,           SHCMD("pamixer -i 5; pkill -RTMIN+10 dwmblocks") },
 	/* Media control */
 	{ 0,                       	XF86XK_AudioPlay,      spawn,           SHCMD("playerctl play-pause") },
 	{ 0,                       	XF86XK_AudioNext,      spawn,           SHCMD("playerctl next") },
