@@ -89,7 +89,7 @@ static Key keys[] = {
 	{ ShiftMask,                    XK_Print,      spawn,           SHCMD("kbd-screenshot 1")},
 	{ MODKEY|ControlMask,           XK_F10,    spawn,          SHCMD("dmenu-playmusic") },
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_x,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
