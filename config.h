@@ -12,12 +12,12 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 static const char *fonts[]          = {"monospace:size=11"};
 static const char dmenufont[]       = "monospace:size=11";
 
-static const char normbgcolor[]       = "#222222";
-static const char normbordercolor[]   = "#444444";
-static const char normfgcolor[]       = "#bbbbbb";
-static const char selfgcolor[]        = "#eeeeee";
-static const char selbordercolor[]    = "#770000";
-static const char selbgcolor[]        = "#005577";
+static const char normbgcolor[]       = "#3b4252";
+static const char normbordercolor[]   = "#3b4252";
+static const char normfgcolor[]       = "#eceff4";
+static const char selbgcolor[]        = "#88c0d0";
+static const char selbordercolor[]    = "#8fbcbb";
+static const char selfgcolor[]        = "#4c566a";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
