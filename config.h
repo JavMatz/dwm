@@ -89,9 +89,6 @@ static Key keys[] = {
 	{ 0,                       	XF86XK_AudioPlay,      spawn,           SHCMD("playerctl play-pause") },
 	{ 0,                       	XF86XK_AudioNext,      spawn,           SHCMD("playerctl next") },
 	{ 0,                       	XF86XK_AudioPrev,      spawn,           SHCMD("playerctl previous") },
-	/* Screenshots */
-	{ 0,                       	XK_Print,      spawn,           SHCMD("kbd-screenshot") },
-	{ ShiftMask,                    XK_Print,      spawn,           SHCMD("kbd-screenshot 1")},
 	{ MODKEY|ControlMask,           XK_F10,    spawn,          SHCMD("dmenu-playmusic") },
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
