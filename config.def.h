@@ -11,8 +11,9 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static int showbar            = 1;     /* 0 means no bar */
 static int topbar             = 1;     /* 0 means bottom bar */
 static char font[]            = "monospace:size=10";
+static char emoji_font[]      = "JoyPixels:pixelsize=8:antialias=true:autohint=true";
 static char dmenufont[]       = "monospace:size=10";
-static const char *fonts[]          = { font };
+static const char *fonts[]          = { font, emoji_font };
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
