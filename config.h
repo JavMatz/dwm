@@ -14,7 +14,7 @@ static const int showsystray        = 1;     /* 0 means no systray */
 static int showbar            = 1;     /* 0 means no bar */
 static int topbar             = 1;     /* 0 means bottom bar */
 static char font[]            = "monospace:size=10";
-static char emoji_font[]      = "JoyPixels:pixelsize=8:antialias=true:autohint=true";
+static char emoji_font[]      = "NotoColorEmoji:pixelsize=11:antialias=true:autohint=true";
 static char dmenufont[]       = "monospace:size=10";
 static const char *fonts[]          = { font, emoji_font };
 static char normbgcolor[]           = "#222222";
@@ -31,7 +31,7 @@ static char *colors[][3] = {
 
 
 /* tagging */
-static const char *tags[] = { "1", "🌐", "3", "4", "5", "6", "7", "8", "9" };
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -102,55 +102,60 @@ ResourcePref resources[] = {
 };
 
 static Key keys[] = {
+	/* modifier               key        function        argument */
 	/* Volume control */
-	{ 0,                       	XF86XK_AudioMute,      spawn,           SHCMD("pamixer -t; pkill -RTMIN+10 dwmblocks") },
-	{ 0,                       	XF86XK_AudioLowerVolume,      spawn,           SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },
-	{ 0,                       	XF86XK_AudioRaiseVolume,      spawn,           SHCMD("pamixer -i 5; pkill -RTMIN+10 dwmblocks") },
+	{ 0,                      XF86XK_AudioMute,          spawn,          SHCMD("pamixer -t; pkill -RTMIN+10 dwmblocks") },
+	{ 0,                      XF86XK_AudioLowerVolume,   spawn,          SHCMD("pamixer -d 5; pkill -RTMIN+10 dwmblocks") },
+	{ 0,                      XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pamixer -i 5; pkill -RTMIN+10 dwmblocks") },
 	/* Media control */
-	{ 0,                       	XF86XK_AudioPlay,      spawn,           SHCMD("playerctl play-pause") },
-	{ 0,                       	XF86XK_AudioNext,      spawn,           SHCMD("playerctl next") },
-	{ 0,                       	XF86XK_AudioPrev,      spawn,           SHCMD("playerctl previous") },
-	{ MODKEY|ControlMask,           XK_F10,    spawn,          SHCMD("dmenu-playmusic") },
-	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
-	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_i,      incnmaster,     {.i = +1 } },
-	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
-	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_l,      setmfact,       {.f = +0.05} },
-	/* Added */
-	{ MODKEY,                       XK_Down,     focusstack,     {.i = +1 } },
-	{ MODKEY,                       XK_Up,   focusstack,     {.i = -1 } },
-	{ MODKEY,                       XK_Left,   setmfact,       {.f = -0.05} },
-	{ MODKEY,                       XK_Right,  setmfact,       {.f = +0.05} },
-	/* end added */
-	{ MODKEY,                       XK_Return, zoom,           {0} },
-	{ MODKEY,                       XK_Tab,    view,           {0} },
-	{ MODKEY|ShiftMask,             XK_c,      killclient,     {0} },
-	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY,                       XK_f,      setlayout,      {.v = &layouts[1]} },
-	{ MODKEY,                       XK_m,      setlayout,      {.v = &layouts[2]} },
-	{ MODKEY,                       XK_space,  setlayout,      {0} },
-	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
-	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
-	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
-	{ MODKEY,                       XK_comma,  focusmon,       {.i = -1 } },
-	{ MODKEY,                       XK_period, focusmon,       {.i = +1 } },
-	{ MODKEY|ShiftMask,             XK_comma,  tagmon,         {.i = -1 } },
-	{ MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
-	TAGKEYS(                        XK_1,                      0)
-	TAGKEYS(                        XK_2,                      1)
-	TAGKEYS(                        XK_3,                      2)
-	TAGKEYS(                        XK_4,                      3)
-	TAGKEYS(                        XK_5,                      4)
-	TAGKEYS(                        XK_6,                      5)
-	TAGKEYS(                        XK_7,                      6)
-	TAGKEYS(                        XK_8,                      7)
-	TAGKEYS(                        XK_9,                      8)
-	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ 0,                      XF86XK_AudioPlay,          spawn,          SHCMD("playerctl play-pause") },
+	{ 0,                      XF86XK_AudioNext,          spawn,          SHCMD("playerctl next") },
+	{ 0,                      XF86XK_AudioPrev,          spawn,          SHCMD("playerctl previous") },
+	/* Screenshots */ 
+	{ 0,                      XK_Print,           	     spawn,          SHCMD("kbd-screenshot") },
+	{ ShiftMask,              XK_Print,         	     spawn,          SHCMD("kbd-screenshot 1") },
+	/* Backlight control */
+	{ 0,                      XF86XK_MonBrightnessDown,  spawn,          SHCMD("xbacklight -dec 10") },
+	{ 0,                      XF86XK_MonBrightnessUp,    spawn,          SHCMD("xbacklight -inc 10 ") },
+	/* Open lf */
+	{ MODKEY,        	  XK_e,                      spawn,          SHCMD("st -e lf") },
+	/* Keepmenu */
+	{ MODKEY,        	  XK_w,                      spawn,          SHCMD("keepmenu") },
+	/* Clipmenu */
+	{ MODKEY,        	  XK_y,                      spawn,          SHCMD("clipmenu") },
+	{ MODKEY,                 XK_p,     		     spawn,          {.v = dmenucmd } },
+	{ MODKEY|ShiftMask,       XK_Return,		     spawn,          {.v = termcmd } },
+	{ MODKEY,                 XK_b,     		     togglebar,      {0} },
+	{ MODKEY,                 XK_j,     		     focusstack,     {.i = +1 } },
+	{ MODKEY,                 XK_k,     		     focusstack,     {.i = -1 } },
+	{ MODKEY,                 XK_i,     		     incnmaster,     {.i = +1 } },
+	{ MODKEY,                 XK_d,     		     incnmaster,     {.i = -1 } },
+	{ MODKEY,                 XK_h,     		     setmfact,       {.f = -0.05} },
+	{ MODKEY,                 XK_l,     		     setmfact,       {.f = +0.05} },
+	{ MODKEY,                 XK_Return,		     zoom,           {0} },
+	{ MODKEY,                 XK_Tab,   		     view,           {0} },
+	{ MODKEY|ShiftMask,       XK_c,     		     killclient,     {0} },
+	{ MODKEY,                 XK_t,     		     setlayout,      {.v = &layouts[0]} },
+	{ MODKEY,                 XK_f,     		     setlayout,      {.v = &layouts[1]} },
+	{ MODKEY,                 XK_m,     		     setlayout,      {.v = &layouts[2]} },
+	{ MODKEY,                 XK_space, 		     setlayout,      {0} },
+	{ MODKEY|ShiftMask,       XK_space, 		     togglefloating, {0} },
+	{ MODKEY,                 XK_0,     		     view,           {.ui = ~0 } },
+	{ MODKEY|ShiftMask,       XK_0,     		     tag,            {.ui = ~0 } },
+	{ MODKEY,                 XK_comma, 		     focusmon,       {.i = -1 } },
+	{ MODKEY,                 XK_period,		     focusmon,       {.i = +1 } },
+	{ MODKEY|ShiftMask,       XK_comma, 		     tagmon,         {.i = -1 } },
+	{ MODKEY|ShiftMask,       XK_period,		     tagmon,         {.i = +1 } },
+	TAGKEYS(                  XK_1,                      0)
+	TAGKEYS(                  XK_2,                      1)
+	TAGKEYS(                  XK_3,                      2)
+	TAGKEYS(                  XK_4,                      3)
+	TAGKEYS(                  XK_5,                      4)
+	TAGKEYS(                  XK_6,                      5)
+	TAGKEYS(                  XK_7,                      6)
+	TAGKEYS(                  XK_8,                      7)
+	TAGKEYS(                  XK_9,                      8)
+	{ MODKEY|ShiftMask,       XK_q,      quit,           {0} },
 };
 
 /* button definitions */
